@@ -39,8 +39,7 @@ public class Viewer {
                 cube.add(new Square(new Vertex(100, 100, 100), new Vertex(100, 100, -100), new Vertex(100, -100, -100), new Vertex(100, -100, 100)));
                 cube.add(new Square(new Vertex(-100, 100, 100), new Vertex(-100, 100, -100), new Vertex(-100, -100, -100), new Vertex(-100, -100, 100)));
 
-                Vertex camera = new Vertex(0, 0, 300);
-                camera = camera.viewCoordinateTrans();
+                Vertex camera = new Vertex(0, 0, 500);
 
                 double heading = Math.toRadians(headingSlider.getValue());
                 Matrix3 headingTransform = new Matrix3(new double[] {
@@ -66,15 +65,15 @@ public class Viewer {
                     Vertex v3 = transform.transform(s.v3);
                     Vertex v4 = transform.transform(s.v4);
 
-                    v1 = v1.viewCoordinateTrans();
-                    v2 = v2.viewCoordinateTrans();
-                    v3 = v3.viewCoordinateTrans();
-                    v4 = v4.viewCoordinateTrans();
+                    v1 = v1.viewCoordinateTrans(camera);
+                    v2 = v2.viewCoordinateTrans(camera);
+                    v3 = v3.viewCoordinateTrans(camera);
+                    v4 = v4.viewCoordinateTrans(camera);
 
-                    Point2D vs1 = v1.screenTransition(camera);
-                    Point2D vs2 = v2.screenTransition(camera);
-                    Point2D vs3 = v3.screenTransition(camera);
-                    Point2D vs4 = v4.screenTransition(camera);
+                    Point2D vs1 = v1.screenTransition();
+                    Point2D vs2 = v2.screenTransition();
+                    Point2D vs3 = v3.screenTransition();
+                    Point2D vs4 = v4.screenTransition();
 
                     Path2D path = new Path2D.Double();
                     path.moveTo(vs1.getX(), vs1.getY());

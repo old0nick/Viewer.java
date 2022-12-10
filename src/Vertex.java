@@ -12,18 +12,22 @@ public class Vertex {
         this.z = z;
     }
 
-    Point2D.Double screenTransition(Vertex camera) {
+    Point2D.Double screenTransition() {
 
         double distance = 200;
 
         return new Point2D.Double(distance * this.x / this.z, distance * this.y / this.z);
     }
 
-    Vertex viewCoordinateTrans() {
+    Vertex viewCoordinateTrans(Vertex camera) {
 
-        double r = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
-        double zeta = Math.acos(z/r);
-        double phi = Math.acos(this.x/(r * Math.sin(zeta)));
+        double r = Math.sqrt(Math.pow(camera.x, 2) + Math.pow(camera.y, 2) + Math.pow(camera.z, 2));
+        double zeta = Math.acos(camera.z/r);
+        double rxy = Math.sqrt(Math.pow(camera.x, 2) + Math.pow(camera.y, 2));
+        double phi = 0;
+        if (rxy != 0) {
+            phi = Math.acos(camera.x/rxy);
+        }
 
         double xE = -this.x * Math.sin(phi) + this.y * Math.cos(phi);
         double yE = -this.x * Math.cos(zeta) * Math.cos(phi) - this.y * Math.cos(zeta) * Math.sin(phi) + this.z * Math.sin(zeta);
