@@ -11,6 +11,7 @@ public class Viewer {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container pane = frame.getContentPane();
         pane.setLayout(new BorderLayout());
 
@@ -39,15 +40,15 @@ public class Viewer {
                 cube.add(new Square(new Vertex(100, 100, 100), new Vertex(100, 100, -100), new Vertex(100, -100, -100), new Vertex(100, -100, 100)));
                 cube.add(new Square(new Vertex(-100, 100, 100), new Vertex(-100, 100, -100), new Vertex(-100, -100, -100), new Vertex(-100, -100, 100)));
 
-                Vertex camera = new Vertex(0, 0, 500);
+                Vertex camera = new Vertex(130, 150, 200);
 
-                double heading = Math.toRadians(headingSlider.getValue());
+                double pitch = -Math.toRadians(headingSlider.getValue());
+                double heading = -Math.toRadians(pitchSlider.getValue());
                 Matrix3 headingTransform = new Matrix3(new double[] {
                         Math.cos(heading), 0, -Math.sin(heading),
                         0, 1, 0,
                         Math.sin(heading), 0, Math.cos(heading)
                 });
-                double pitch = Math.toRadians(pitchSlider.getValue());
                 Matrix3 pitchTransform = new Matrix3(new double[] {
                         1, 0, 0,
                         0, Math.cos(pitch), Math.sin(pitch),
