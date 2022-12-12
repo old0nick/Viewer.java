@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.geom.Point2D;
 
 
@@ -12,18 +11,15 @@ public class Vertex {
         this.z = z;
     }
 
-    Point2D.Double screenTransition() {
-
-        double distance = 200;
-
+    Point2D.Double screenTransition(double distance) {
         return new Point2D.Double(distance * this.x / this.z, distance * this.y / this.z);
     }
 
-    Vertex viewCoordinateTrans(Vertex camera) {
+    Vertex viewCoordinateTrans(Vertex camera, double cd) {
 
-        double r = Math.sqrt(Math.pow(camera.x, 2) + Math.pow(camera.y, 2) + Math.pow(camera.z, 2));
+        double r = Math.sqrt(Math.pow(camera.x, 2) + Math.pow(camera.y, 2) + Math.pow(camera.z, 2)) + cd;
         double zeta = Math.acos(camera.z/r);
-        double rxy = Math.sqrt(Math.pow(camera.x, 2) + Math.pow(camera.y, 2));
+        double rxy = Math.sqrt(Math.pow(camera.x, 2) + Math.pow(camera.y, 2)) + cd;
         double phi = 0;
         if (rxy != 0) {
             phi = Math.acos(camera.x/rxy);
