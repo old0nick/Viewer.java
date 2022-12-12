@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.util.List;
 import java.util.ArrayList;
 import java.awt.geom.*;
@@ -91,6 +90,7 @@ public class Viewer {
         renderPanel.addMouseWheelListener((MouseWheelEvent e) -> {
             int z = e.getWheelRotation();
             System.out.println(z);
+
             if (z < 0) {
                 distance[0] -= 10.0;
                 cd[0] -= 10.0;
